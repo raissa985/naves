@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxoii2wswrcir"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_dq8g0"]
+[ext_resource type="Texture2D" uid="uid://c0gyn4j567edu" path="res://sprites/Players/playerShip3_blue.png" id="2_ihddn"]
+[ext_resource type="Script" path="res://scripts/gun.gd" id="3_vjwpk"]
+[ext_resource type="Texture2D" uid="uid://dcaic2jpaumbl" path="res://sprites/Lasers/laserBlue04.png" id="4_noura"]
+[ext_resource type="PackedScene" uid="uid://c0ehh3tg1r2ae" path="res://prefers/power_up.tscn" id="5_fm4w0"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="6_k7r0n"]
+[ext_resource type="Texture2D" uid="uid://ccoba5toxcf0h" path="res://sprites/Enemies/enemyBlack1.png" id="7_8is6u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1tsc"]
+radius = 38.1182
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(88, 92)
+script = ExtResource("1_dq8g0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = 1.5708
+texture = ExtResource("2_ihddn")
+
+[node name="gun" type="Node2D" parent="Player"]
+script = ExtResource("3_vjwpk")
+laserSpeed = 1000
+laserTexture = ExtResource("4_noura")
+
+[node name="LaserPos" type="Marker2D" parent="Player/gun"]
+
+[node name="Area2D" type="Area2D" parent="Player" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CircleShape2D_y1tsc")
+
+[node name="PowerUp" parent="." instance=ExtResource("5_fm4w0")]
+
+[node name="Enemy" type="Area2D" parent="."]
+script = ExtResource("6_k7r0n")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+rotation = -1.5708
+texture = ExtResource("7_8is6u")

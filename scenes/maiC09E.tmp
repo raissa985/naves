@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxoii2wswrcir"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_dq8g0"]
+[ext_resource type="Texture2D" uid="uid://c0gyn4j567edu" path="res://sprites/Players/playerShip3_blue.png" id="2_ihddn"]
+[ext_resource type="Script" path="res://scripts/gun.gd" id="3_vjwpk"]
+[ext_resource type="PackedScene" uid="uid://dgj3iilknmsc" path="res://prefers/area_2d.tscn" id="4_6s04w"]
+[ext_resource type="Texture2D" uid="uid://dcaic2jpaumbl" path="res://sprites/Lasers/laserBlue04.png" id="4_noura"]
+[ext_resource type="Texture2D" uid="uid://cxqk4dgu0288r" path="res://sprites/Power-ups/powerupBlue_star.png" id="6_0cyi5"]
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="6_x1cc2"]
+[ext_resource type="Texture2D" uid="uid://d1vlcxkxvtkvx" path="res://sprites/Lasers/laserBlue11.png" id="7_8n71i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_edwsq"]
+radius = 39.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7oun"]
+size = Vector2(32, 32)
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(88, 92)
+script = ExtResource("1_dq8g0")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = 1.5708
+texture = ExtResource("2_ihddn")
+
+[node name="gun" type="Node2D" parent="Player"]
+script = ExtResource("3_vjwpk")
+laserSpeed = 1000
+laserTexture = ExtResource("4_noura")
+
+[node name="LaserPos" type="Marker2D" parent="Player/gun"]
+
+[node name="laser" parent="." instance=ExtResource("4_6s04w")]
+position = Vector2(147, 92)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="laser"]
+position = Vector2(-59, 0)
+shape = SubResource("CircleShape2D_edwsq")
+
+[node name="PowerUp" type="Area2D" parent="."]
+script = ExtResource("6_x1cc2")
+laserTexture = ExtResource("7_8n71i")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PowerUp"]
+texture = ExtResource("6_0cyi5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUp"]
+shape = SubResource("RectangleShape2D_b7oun")
+
+[connection signal="area_entered" from="PowerUp" to="PowerUp" method="_on_area_entered"]

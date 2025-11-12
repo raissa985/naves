@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgj3iilknmsc"]
+
+[ext_resource type="Script" path="res://scripts/area_2d.gd" id="1_1jeke"]
+[ext_resource type="Texture2D" uid="uid://b5wekob60epwf" path="res://sprites/Lasers/laserBlue03.png" id="2_pl663"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh8rc"]
+size = Vector2(41, 13)
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(160, 88)
+script = ExtResource("1_1jeke")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_pl663")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_xh8rc")

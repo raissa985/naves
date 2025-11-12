@@ -1,14 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxoii2wswrcir"]
+[gd_scene load_steps=18 format=3 uid="uid://cxoii2wswrcir"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dq8g0"]
 [ext_resource type="Texture2D" uid="uid://c0gyn4j567edu" path="res://sprites/Players/playerShip3_blue.png" id="2_ihddn"]
+[ext_resource type="Texture2D" uid="uid://b8y3v231eh7" path="res://sprites/Meteors/meteorGrey_big3.png" id="3_28chs"]
 [ext_resource type="Script" path="res://scripts/gun.gd" id="3_vjwpk"]
+[ext_resource type="Texture2D" uid="uid://dy8ceragkl7xi" path="res://sprites/Meteors/meteorGrey_big4.png" id="4_jxmcg"]
 [ext_resource type="Texture2D" uid="uid://dcaic2jpaumbl" path="res://sprites/Lasers/laserBlue04.png" id="4_noura"]
 [ext_resource type="PackedScene" uid="uid://c0ehh3tg1r2ae" path="res://prefers/power_up.tscn" id="5_fm4w0"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="6_k7r0n"]
+[ext_resource type="Texture2D" uid="uid://di5uloo2o4e6" path="res://sprites/Meteors/meteorGrey_med1.png" id="6_o4kk4"]
 [ext_resource type="Texture2D" uid="uid://ccoba5toxcf0h" path="res://sprites/Enemies/enemyBlack1.png" id="7_8is6u"]
 [ext_resource type="Texture2D" uid="uid://cdbxf6jm1d3f1" path="res://sprites/Meteors/meteorGrey_tiny1.png" id="9_3umiw"]
 [ext_resource type="Texture2D" uid="uid://ckeogyy57qqqn" path="res://sprites/Meteors/meteorGrey_tiny2.png" id="10_gejd3"]
+[ext_resource type="Texture2D" uid="uid://buse3a6js378h" path="res://sprites/Meteors/meteorGrey_med2.png" id="11_on5k4"]
 
 [sub_resource type="Gradient" id="Gradient_644x5"]
 offsets = PackedFloat32Array(0.3, 0.68, 1)
@@ -31,44 +35,74 @@ radius = 44.0454
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1280, 720)
 
 [node name="BG" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
 offset_left = 3.0
 offset_top = 2.0
-offset_right = 1279.0
-offset_bottom = 719.0
+offset_right = 1427.0
+offset_bottom = 751.0
 color = Color(0.131376, 1.29081e-05, 0.131375, 1)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-205, 482)
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1280, 720)
 
-[node name="MeteorGreyTiny1" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(135, 586)
+[node name="MeteorGreyTiny1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(340, 104)
 texture = ExtResource("9_3umiw")
 
-[node name="MeteorGreyTiny2" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(941, 418)
+[node name="MeteorGreyTiny2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1146, -64)
 texture = ExtResource("10_gejd3")
 
-[node name="MeteorGreyTiny3" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(573, 631)
+[node name="MeteorGreyTiny3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(778, 149)
 texture = ExtResource("10_gejd3")
 
-[node name="MeteorGreyTiny4" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(239, 91)
+[node name="MeteorGreyTiny4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(444, -391)
 texture = ExtResource("9_3umiw")
 
-[node name="MeteorGreyTiny5" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(1036, 129)
+[node name="MeteorGreyTiny5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1241, -353)
 texture = ExtResource("10_gejd3")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="MeteorGreyBig3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(313, 639)
+texture = ExtResource("3_28chs")
+
+[node name="MeteorGreyBig4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(1170, 299)
+texture = ExtResource("4_jxmcg")
+
+[node name="MeteorGreyBig5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(1000, 601)
+texture = ExtResource("3_28chs")
+
+[node name="MeteorGreyMed2" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(104, 447)
+texture = ExtResource("11_on5k4")
+
+[node name="MeteorGreyMed1" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(735, 48)
+texture = ExtResource("6_o4kk4")
+
+[node name="MeteorGreyMed3" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(627, 486)
+texture = ExtResource("11_on5k4")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(690, 398)
+position = Vector2(279, 230)
 script = ExtResource("1_dq8g0")
 metadata/_edit_group_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Player"]
-position = Vector2(-243.5, -162)
 amount = 250
 emission_shape = 1
 emission_sphere_radius = 10.05
@@ -80,12 +114,10 @@ scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_644x5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-207.5, -162)
 rotation = 1.5708
 texture = ExtResource("2_ihddn")
 
 [node name="gun" type="Node2D" parent="Player"]
-position = Vector2(-207.5, -162)
 script = ExtResource("3_vjwpk")
 laserSpeed = 1000
 laserTexture = ExtResource("4_noura")
@@ -93,13 +125,13 @@ laserTexture = ExtResource("4_noura")
 [node name="LaserPos" type="Marker2D" parent="Player/gun"]
 
 [node name="Area2D" type="Area2D" parent="Player" groups=["player"]]
-position = Vector2(-207.5, -162)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("CircleShape2D_y1tsc")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-691, -396)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
 
 [node name="PowerUp" parent="." instance=ExtResource("5_fm4w0")]
 

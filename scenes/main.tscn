@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxoii2wswrcir"]
+[gd_scene load_steps=14 format=3 uid="uid://cxoii2wswrcir"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dq8g0"]
 [ext_resource type="Texture2D" uid="uid://c0gyn4j567edu" path="res://sprites/Players/playerShip3_blue.png" id="2_ihddn"]
@@ -7,22 +7,85 @@
 [ext_resource type="PackedScene" uid="uid://c0ehh3tg1r2ae" path="res://prefers/power_up.tscn" id="5_fm4w0"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="6_k7r0n"]
 [ext_resource type="Texture2D" uid="uid://ccoba5toxcf0h" path="res://sprites/Enemies/enemyBlack1.png" id="7_8is6u"]
+[ext_resource type="Texture2D" uid="uid://cdbxf6jm1d3f1" path="res://sprites/Meteors/meteorGrey_tiny1.png" id="9_3umiw"]
+[ext_resource type="Texture2D" uid="uid://ckeogyy57qqqn" path="res://sprites/Meteors/meteorGrey_tiny2.png" id="10_gejd3"]
+
+[sub_resource type="Gradient" id="Gradient_644x5"]
+offsets = PackedFloat32Array(0.3, 0.68, 1)
+colors = PackedColorArray(0.894382, 0.122131, 0.731695, 1, 0.0745098, 0.0588235, 0.886275, 1, 0.701961, 0, 0.898039, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1tsc"]
 radius = 38.1182
 
+[sub_resource type="Gradient" id="Gradient_ljua6"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.566667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.433333, 0.433333, 0.433333, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cyf8k"]
+radius = 44.0454
+
 [node name="Main" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="BG" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 1279.0
+offset_bottom = 719.0
+color = Color(0.131376, 1.29081e-05, 0.131375, 1)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-205, 482)
+
+[node name="MeteorGreyTiny1" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(135, 586)
+texture = ExtResource("9_3umiw")
+
+[node name="MeteorGreyTiny2" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(941, 418)
+texture = ExtResource("10_gejd3")
+
+[node name="MeteorGreyTiny3" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(573, 631)
+texture = ExtResource("10_gejd3")
+
+[node name="MeteorGreyTiny4" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(239, 91)
+texture = ExtResource("9_3umiw")
+
+[node name="MeteorGreyTiny5" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(1036, 129)
+texture = ExtResource("10_gejd3")
+
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(88, 92)
+position = Vector2(690, 398)
 script = ExtResource("1_dq8g0")
 metadata/_edit_group_ = true
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player"]
+position = Vector2(-243.5, -162)
+amount = 250
+emission_shape = 1
+emission_sphere_radius = 10.05
+direction = Vector2(0, 25)
+spread = 61.36
+gravity = Vector2(-200, 0)
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_644x5")
+
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(-207.5, -162)
 rotation = 1.5708
 texture = ExtResource("2_ihddn")
 
 [node name="gun" type="Node2D" parent="Player"]
+position = Vector2(-207.5, -162)
 script = ExtResource("3_vjwpk")
 laserSpeed = 1000
 laserTexture = ExtResource("4_noura")
@@ -30,16 +93,44 @@ laserTexture = ExtResource("4_noura")
 [node name="LaserPos" type="Marker2D" parent="Player/gun"]
 
 [node name="Area2D" type="Area2D" parent="Player" groups=["player"]]
+position = Vector2(-207.5, -162)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("CircleShape2D_y1tsc")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-691, -396)
+
 [node name="PowerUp" parent="." instance=ExtResource("5_fm4w0")]
 
 [node name="Enemy" type="Area2D" parent="."]
+position = Vector2(17, -9)
 script = ExtResource("6_k7r0n")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 rotation = -1.5708
 texture = ExtResource("7_8is6u")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Enemy"]
+emitting = false
+amount = 500
+one_shot = true
+emission_shape = 2
+emission_sphere_radius = 66.93
+spread = 54.09
+initial_velocity_min = 212.12
+initial_velocity_max = 212.12
+angular_velocity_min = 247.27
+angular_velocity_max = 247.27
+orbit_velocity_min = -40.4
+orbit_velocity_max = 40.4
+color = Color(1, 0.141176, 1, 1)
+color_ramp = SubResource("Gradient_ljua6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("CircleShape2D_cyf8k")
+
+[connection signal="area_entered" from="Enemy" to="Enemy" method="_on_area_entered"]

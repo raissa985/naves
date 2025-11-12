@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh8rc"]
 size = Vector2(41, 13)
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" groups=["laser"]]
 position = Vector2(160, 88)
 script = ExtResource("1_1jeke")
 metadata/_edit_group_ = true
